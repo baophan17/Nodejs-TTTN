@@ -8,7 +8,7 @@ let handleUserLogin = async (email, password) => {
             let isExits = await checkUserEmail(email);
             if (isExits) {
                 let user = await db.User.findOne({
-                    attributes: ['email', 'roleId', 'password'],
+                    attributes: ['email', 'roleId', 'password', 'firstName', 'lastName'],
                     where: { email: email },
                     raw: true,
                 });
@@ -160,6 +160,7 @@ let updateUserData = (data) => {
                 //     lastName: data.lastName,
                 //     address: data.address
                 // })
+
                 resolve({
                     errCode: 0,
                     message: "Update user succeeds!"
