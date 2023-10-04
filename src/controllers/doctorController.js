@@ -67,10 +67,25 @@ let bulkCreteSchedule = async (req, res) => {
         })
     }
 }
+let getSheduleByDate = async (req, res) => {
+    try {
+        let infor = await doctorSevice.getSheduleByDate(req.query.doctorId, req.query.date)
+        return res.status(200).json(
+            infor
+        );
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Error from server !"
+        })
+    }
+}
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     postInforDoctor: postInforDoctor,
     getDetailDoctorById: getDetailDoctorById,
-    bulkCreteSchedule: bulkCreteSchedule
+    bulkCreteSchedule: bulkCreteSchedule,
+    getSheduleByDate: getSheduleByDate
 }
