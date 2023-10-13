@@ -15,8 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     };
     Specialty.init({
         name: DataTypes.STRING,
-        description: DataTypes.TEXT,
-        image: DataTypes.STRING,
+        decscriptionHTML: DataTypes.TEXT,
+        decscriptionMarkdown: DataTypes.TEXT,
+        image: DataTypes.TEXT,
     }, {
         sequelize,
         modelName: 'Specialty',
