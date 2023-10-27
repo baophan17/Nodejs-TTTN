@@ -179,7 +179,7 @@ let getDetailDoctorById = (inputId) => {
                                 { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
                                 { model: db.Allcode, as: 'provinceTypeData', attributes: ['valueEn', 'valueVi'] },
                                 { model: db.Allcode, as: 'paymentTypeData', attributes: ['valueEn', 'valueVi'] },
-                                { model: db.Specialty, as: 'specialtyTypeData', attributes: ['name'] }, //bug #92
+                                // { model: db.Specialty, as: 'specialtyTypeData', attributes: ['name'] }, //bug #92
 
 
                             ]
