@@ -31,6 +31,69 @@ let createClinic = (data) => {
         }
     })
 }
+let getAllClinic = () => {
+    return new Promise(async (resolve, rejct) => {
+        try {
+            let data = await db.Clinic.findAll({
+
+            });
+            if (data && data.length > 0) {
+                data.map(item => {
+                    item.image = new Buffer(item.image, 'base64').toString('binary')
+                    return item;
+                })
+            }
+            resolve({
+                errCode: 0,
+                errMessage: "Ok",
+                data
+            })
+        } catch (e) {
+            rejct(e)
+        }
+    })
+}
+let getDetailClinicById = (inputId) => {
+    return new Promise(async (resolve, rejct) => {
+        try {
+            if (!inputId) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Missing required parameter!"
+                })
+            } else {
+                let data = await db.Clinic.findOne({
+                    where: {
+                        id: inputId
+                    },
+                    attributes: ['address', 'name', 'decscriptionHTML', 'decscriptionMarkdown']
+
+                })
+                if (data) {
+                    let doctorClinic = [];
+
+                    doctorClinic = await db.Doctor_Infor.findAll({
+                        where: { clinicId: inputId },
+                        attributes: ['doctorId', 'provinceId']
+                    })
+
+                    data.doctorClinic = doctorClinic;
+
+                } else data = {}
+                resolve({
+                    errCode: 0,
+                    errMessage: "Ok",
+                    data
+                })
+            }
+
+        } catch (e) {
+            rejct(e)
+        }
+    })
+}
 module.exports = {
-    createClinic: createClinic
+    createClinic: createClinic,
+    getAllClinic: getAllClinic,
+    getDetailClinicById: getDetailClinicById,
 }

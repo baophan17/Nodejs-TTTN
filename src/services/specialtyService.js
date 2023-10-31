@@ -34,10 +34,7 @@ let getAllSpecialty = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let data = await db.Specialty.findAll({
-                // attributes: {
-                //     exclude: ['image']
-                // },
-                // limit: 2,
+
             });
             if (data && data.length > 0) {
                 data.map(item => {
