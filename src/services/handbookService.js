@@ -68,11 +68,9 @@ let getDetailHandbookById = (inputId) => {
                     // attributes: ['title', 'image', 'decscriptionHTML', 'decscriptionMarkdown', 'createdAt', 'updatedAt']
 
                 })
-                if (data && data.length > 0) {
-                    data.map(item => {
-                        item.image = new Buffer(item.image, 'base64').toString('binary')
-                        return item;
-                    })
+                if (data && data.image) {
+                    data.image = new Buffer(data.image, 'base64').toString('binary')
+
                 }
                 resolve({
                     errCode: 0,
